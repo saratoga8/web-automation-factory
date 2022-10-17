@@ -1,1 +1,5 @@
-/.env
+.env.*
+./*.js
+./*.js.map
+/node_modules/
+/dist/

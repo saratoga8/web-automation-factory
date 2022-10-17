@@ -1,0 +1,49 @@
+import {Element, Elements} from "./Element";
+import ElementInfo = Elements.ElementInfo;
+import {Framework} from "./Framework";
+
+export class ElementCypress implements Element<string> {
+    readonly framework: Framework;
+    readonly info: Elements.ElementInfo;
+
+    private readonly aliasName = "saved"
+
+    constructor(info: ElementInfo, framework: Framework) {
+        this.info = info
+        this.framework = framework
+    }
+
+    is(state: Elements.State): boolean {
+        return false;
+    }
+
+    element(info: Elements.ElementInfo, ind?: number): string {
+        if (!ind) {
+            cy
+                .get(this.info.selector.value)
+                .find(info.selector.value)
+                .as(this.aliasName)
+                .end()
+            cy.wait(`@${this.aliasName}`)
+        }
+        else {
+            cy
+                .get(this.info.selector.value)
+                .find(info.selector.value)
+                .eq(ind)
+                .as(this.aliasName)
+                .end()
+            cy.wait(`@${this.aliasName}`)
+        }
+
+        return this.aliasName
+    }
+
+    click(): void {
+        cy
+            .get(`@${this.aliasName}`)
+            .click()
+            .end()
+    }
+
+}

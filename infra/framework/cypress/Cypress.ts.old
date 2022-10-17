@@ -1,0 +1,24 @@
+import { BrowserWrapper } from "./BrowserWrapper";
+import {Framework} from "./Framework";
+import {Element, Elements} from "./Element";
+import {ElementCypress} from "./ElementCypress";
+import ElementInfo = Elements.ElementInfo;
+
+
+export class Cypress implements Framework {
+    public get browser(): Promise<BrowserWrapper> {
+        return new CypressBrowser();
+    }
+
+    public getElement(info: ElementInfo): Element<string> {
+        console.assert('bla')
+        return new ElementCypress(info, this)
+    }
+}
+
+export class CypressBrowser extends BrowserWrapper {
+    async getToUrl(url: string): Promise<void> {
+        cy.visit(url)
+    }
+}
+
