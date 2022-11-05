@@ -1,4 +1,4 @@
-import {Element, FrameworkElementType} from "../../framework/Element";
+import {Element, FrameworkElementType} from "./Element";
 
 export interface ElementWithText extends Element<FrameworkElementType> {
     text(): Promise<string>

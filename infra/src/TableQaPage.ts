@@ -1,17 +1,18 @@
 import {PlaygroundPage} from "./PlaygroundPage";
 import {Framework} from "../framework/Framework";
-import {SelectorType} from "../framework/Selector";
-import {Elements} from "../framework/Element";
+import {SelectorType} from "./Selector";
+import {Element, Elements, FrameworkElementType} from "./PageElements/Element";
 import ElementInfo = Elements.ElementInfo;
 import {Playgrounds} from "./OverviewPage";
+import {TextInputElement} from "./PageElements/TextInputElement";
 
 
 export class TableQaPage extends PlaygroundPage {
-    private readonly rootElement: ElementInfo
+    private readonly rootElementInfo: ElementInfo
 
     constructor(framework: Framework) {
         super(framework, 'Table Q&A');
-        this.rootElement = { name: `The Root element of the page ${this.name}`, selector: this.rootElementSelector }
+        this.rootElementInfo = { name: `The Root element of the page ${this.name}`, selector: this.rootElementSelector }
     }
 
     async isOpen(): Promise<boolean> {
@@ -22,7 +23,9 @@ export class TableQaPage extends PlaygroundPage {
                 value: 'div[data-testid="preset_selector"] input'
             }
         }
-        const txt = await (await (await this.framework.getElement(this.rootElement)).element(elementInfo)).text()
+        const rootElement = await this.framework.getElement(this.rootElementInfo))
+        const element = rootElement.element(elementInfo)
+        const txt = new TextElement(element).text()
         return txt === this.name
     }
 

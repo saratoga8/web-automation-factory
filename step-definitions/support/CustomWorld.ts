@@ -17,4 +17,6 @@ export default class CustomWorld extends World {
         }
         return this.browser
     }
+
+    [key: string]: any;
 }

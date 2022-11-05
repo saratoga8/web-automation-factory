@@ -1,6 +1,6 @@
 import {Framework} from "../Framework";
 import {BrowserWrapper} from "../BrowserWrapper";
-import {Element, Elements} from "../Element";
+import {Element, Elements} from "../../src/PageElements/Element";
 import {BrowserPuppeteerWrapper} from "./BrowserPuppeteerWrapper";
 import {ElementPuppeteer} from "./ElementPuppeteer";
 import {ElementHandle} from "puppeteer";
@@ -21,7 +21,7 @@ export class Puppeteer implements Framework {
                 case Elements.Types.BUTTON: return new Button(elementInfo)
                 case Elements.Types.TEXT_INPUT: return new TextInputElement(elementInfo)
                 default: {
-                    assert.fail(`Unknown element type ${Number(elementInfo.type})`)
+                    assert.fail(`Unknown element type ${Number(elementInfo.type)}`)
                 }
             }
         }
@@ -32,6 +32,3 @@ export class Puppeteer implements Framework {
         return new Promise(r => setTimeout(r, mSeconds))
     }
 }
-
-
-

@@ -1,8 +1,8 @@
 import {ElementHandle} from "puppeteer"
 import {assert} from "chai";
-import {Element, Elements} from "../Element";
+import {Element, Elements} from "../../src/PageElements/Element";
 import {BrowserPuppeteerWrapper} from "./BrowserPuppeteerWrapper";
-import {Selector, SelectorType} from "../Selector";
+import {Selector, SelectorType} from "../../src/Selector";
 import State = Elements.States;
 
 export class ElementPuppeteer implements Element<ElementHandle>{

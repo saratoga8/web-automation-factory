@@ -1,11 +1,17 @@
-import { Button as GeneralButton } from '../../../src/PageElements/Button'
 import {ElementPuppeteer} from "../ElementPuppeteer";
 import {assert} from "chai";
 import {BrowserPuppeteerWrapper} from "../BrowserPuppeteerWrapper";
+import {Elements} from "../../../src/PageElements/Element";
+import {ElementWithText} from "../../../src/PageElements/ElementWithText";
 
-export class Button extends ElementPuppeteer implements GeneralButton {
+
+export class Button extends ElementPuppeteer implements Clickable, ElementWithText {
+    constructor(info: Elements.ElementInfo) {
+        super(info)
+    }
+
     async click(): Promise<void> {
-        await (await this.instance).click()
+        await (<Clickable>await this.instance).click()
     }
 
     async text(): Promise<string> {

@@ -1,9 +1,11 @@
-import {SelectorType} from "../framework/Selector";
+import {SelectorType} from "./Selector";
 import {RootedPage} from "./RootedPage";
 import {Framework} from "../framework/Framework";
-import {Elements} from "../framework/Element";
+import {Element, Elements, FrameworkElementType} from "./PageElements/Element";
 import ElementInfo = Elements.ElementInfo;
 import { waitFor, WaitInfo } from "../src/Utils"
+import {ElementOfFramework} from "./PageElements/ElementOfFramework";
+import {Button} from "./PageElements/Button";
 
 
 
@@ -14,7 +16,7 @@ export enum Playgrounds {
 
 export class OverviewPage extends RootedPage {
     static readonly SIGNIN_TIMEOUT = 60 * 1000
-    private readonly rootElement: ElementInfo
+    private readonly rootElementInfo: ElementInfo
 
     constructor(framework: Framework) {
         super(
@@ -24,7 +26,7 @@ export class OverviewPage extends RootedPage {
             'Overview',
             { type: SelectorType.CSS, value: '#root' }
         )
-        this.rootElement = { name: 'Root element', selector: this.rootElementSelector, timeoutMilliSeconds: OverviewPage.SIGNIN_TIMEOUT }
+        this.rootElementInfo = { name: 'Root element', selector: this.rootElementSelector, timeoutMilliSeconds: OverviewPage.SIGNIN_TIMEOUT }
     }
 
     async isOpen(): Promise<boolean> {
@@ -36,7 +38,7 @@ export class OverviewPage extends RootedPage {
         //     }
         // }
         // this.framework.browser
-        // return (await (await this.framework.getElement(this.rootElement)).element(elementInfo)).is(State.visible)
+        // return (await (await this.framework.getElement(this.rootElementInfo)).element(elementInfo)).is(State.visible)
 
         // for (let i = 0; i < OverviewPage.SIGNIN_TIMEOUT; ++i) {
         //     const actualURL = await (await this.framework.browser).getUrl()
@@ -74,7 +76,10 @@ export class OverviewPage extends RootedPage {
             }
         }
 
-        await (await (await this.framework.getElement(this.rootElement)).element(playgroundsContainerElementInfo, playground.valueOf())).click()
+        const rootElement = new ElementOfFramework(this.framework, this.rootElementInfo)
+        const element = await rootElement.element(playgroundsContainerElementInfo, playground.valueOf()) as Clickable
+        const btn = Button.createByOtherElement(this.framework, element)
+        await btn.click()
     }
 }
 

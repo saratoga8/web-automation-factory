@@ -1,22 +1,27 @@
-import {Element, Elements, FrameworkElementType} from "../../framework/Element";
+import {Element, Elements, FrameworkElementType} from "./Element";
 import {Framework} from "../../framework/Framework";
+import PossibleElementType = Elements.PossibleElementType;
 
-export abstract class ElementOfFramework implements Element<FrameworkElementType> {
-    readonly info: Elements.ElementInfo;
+export class ElementOfFramework implements Element<FrameworkElementType> {
+    constructor(
+        readonly framework: Framework,
+        readonly info: Elements.ElementInfo
+    ) {}
 
-    protected constructor(protected readonly framework: Framework, info: Elements.ElementInfo) {
-        this.info = info
+    private async getRootElement(): Promise<Element<FrameworkElementType>> {
+        return await (await this.framework).getElement(this.info) as Element<FrameworkElementType>
     }
 
-    async element(info: Elements.ElementInfo, ind?: number): Promise<Element<FrameworkElementType>> {
-        return (await (await this.framework).getElement(this.info)).element(info, ind)
+    async element(info: Elements.ElementInfo, ind?: number): Promise<Element<FrameworkElementType> | PossibleElementType> {
+        const rootElement = await this.getRootElement()
+        return rootElement.element(info, ind)
     }
 
     async elementOfFramework(info: Elements.ElementInfo, ind?: number): Promise<FrameworkElementType> {
-        return (await (await this.framework).getElement(this.info)).elementOfFramework(info, ind)
+        return (await this.getRootElement()).elementOfFramework(info, ind)
     }
 
     async is(state: Elements.States): Promise<boolean> {
-        return (await (await this.framework).getElement(this.info)).is(state)
+        return (await this.getRootElement()).is(state)
     }
 }

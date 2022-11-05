@@ -1,7 +1,7 @@
-import {Selector} from "./Selector";
+import {Selector} from "../Selector";
 import ElementInfo = Elements.ElementInfo;
 import {ElementHandle} from "puppeteer";
-import {ElementWithText} from "../src/PageElements/ElementWithText";
+import {ElementWithText} from "./ElementWithText";
 import PossibleElementType = Elements.PossibleElementType;
 
 export namespace Elements {

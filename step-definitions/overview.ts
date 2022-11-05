@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { OverviewPage, Playgrounds } from "../infra/src/OverviewPage"
 import { Puppeteer as Framework } from "../infra/framework/puppeteer/Puppeteer"
 import { Given, When } from "@cucumber/cucumber";
-import {LoginPage} from "../infra/src/loginPage";
+import LoginPage from "../infra/src/loginPage";
 
 const framework = new Framework()
 

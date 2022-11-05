@@ -1,7 +1,7 @@
 import {PageObject} from "./PageObject";
 import {Framework} from "../framework/Framework";
-import {Elements} from "../framework/Element";
-import {SelectorType} from "../framework/Selector";
+import {Elements} from "./PageElements/Element";
+import {SelectorType} from "./Selector";
 import ElementInfo = Elements.ElementInfo;
 import {Button} from "./PageElements/Button";
 import {TextInputElement} from "./PageElements/TextInputElement";
@@ -10,7 +10,7 @@ import {TextInputElement} from "./PageElements/TextInputElement";
 
 type LoginCreds = { email: string, pwd: string }
 
-export class LoginPage extends PageObject {
+export default class LoginPage extends PageObject {
     private readonly emailFieldInfo: ElementInfo
     private readonly pwdFieldInfo: ElementInfo
     private readonly submitBtn: ElementInfo
@@ -44,8 +44,7 @@ export class LoginPage extends PageObject {
         await new TextInputElement(this.framework, this.emailFieldInfo).type(creds.email)
         await new TextInputElement(this.framework, this.pwdFieldInfo).type(creds.pwd)
 
-        await new Button()
-        const submitBtn = await this.framework.getElement<Button>(this.submitBtn)
-        await submitBtn.click()
+        const btn = await Button.createByElementInfo(this.framework, this.submitBtn)
+        await btn.click()
     }
 }

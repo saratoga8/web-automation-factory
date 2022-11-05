@@ -1,4 +1,4 @@
-import {Selector} from "../framework/Selector";
+import {Selector} from "./Selector";
 import {Framework} from "../framework/Framework";
 import {PageObject} from "./PageObject";
 
