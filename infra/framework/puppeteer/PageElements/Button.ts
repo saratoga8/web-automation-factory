@@ -2,10 +2,11 @@ import {ElementPuppeteer} from "../ElementPuppeteer";
 import {assert} from "chai";
 import {BrowserPuppeteerWrapper} from "../BrowserPuppeteerWrapper";
 import {Elements} from "../../../src/PageElements/Element";
-import {ElementWithText} from "../../../src/PageElements/ElementWithText";
+import {Clickable} from "../../../src/PageElements/Clickable";
+import {ContainsText} from "../../../src/PageElements/ContainsText";
 
 
-export class Button extends ElementPuppeteer implements Clickable, ElementWithText {
+export class Button extends ElementPuppeteer implements Clickable, ContainsText {
     constructor(info: Elements.ElementInfo) {
         super(info)
     }

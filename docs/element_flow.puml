@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+User -> Test: run
+Test -> Page: new(framework)
+Page -> InputTextElement: new(framework)
+InputTextElement -> FrameWork: elementBuilder()
+FrameWork -> ElementBuilder: build()
+InputTextElement <-- ElementBuilder: instance
+Page -> InputTextElement: input(txt)
+
+@enduml

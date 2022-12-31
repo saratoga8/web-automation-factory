@@ -1,9 +1,9 @@
 import {BrowserWrapper} from "../BrowserWrapper";
-import puppeteer, {ElementHandle, Page} from "puppeteer"
-import { assert} from "chai";
+import { ElementHandle, Page, Browser, launch } from "puppeteer"
+import {assert} from "chai";
 
 export class BrowserPuppeteerWrapper extends BrowserWrapper {
-    private static _browser: puppeteer.Browser
+    private static _browser: Browser
     private static instance: BrowserPuppeteerWrapper
 
     private constructor() {
@@ -13,7 +13,7 @@ export class BrowserPuppeteerWrapper extends BrowserWrapper {
     static async getInstance(): Promise<BrowserPuppeteerWrapper> {
         if (!BrowserPuppeteerWrapper.instance) {
             BrowserPuppeteerWrapper.instance = new BrowserPuppeteerWrapper()
-            BrowserPuppeteerWrapper._browser = await puppeteer.launch(
+            BrowserPuppeteerWrapper._browser = await launch(
                 {
                     product: 'chrome',
                     headless: false,
@@ -39,7 +39,7 @@ export class BrowserPuppeteerWrapper extends BrowserWrapper {
         assert.fail(`The element with the selector ${selector} not found`)
     }
 
-    get browser(): puppeteer.Browser {
+    get browser(): Browser {
         return BrowserPuppeteerWrapper._browser;
     }
 

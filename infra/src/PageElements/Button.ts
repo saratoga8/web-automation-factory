@@ -1,34 +1,30 @@
-import {Element, Elements, FrameworkElementType} from "./Element";
-import {ElementWithText} from "./ElementWithText";
-import {ElementOfFramework} from "./ElementOfFramework";
+import {Element, Elements} from "./Element";
+import {ElementBuilder, Framework} from "../../framework/Framework";
 import ElementInfo = Elements.ElementInfo;
-import {Framework} from "../../framework/Framework";
-import {Cli} from "@cucumber/cucumber";
+import {ContainsText} from "./ContainsText";
+import {Clickable} from "./Clickable";
 
+export class Button extends Element implements Clickable, ContainsText {
+    private elementBuilder: ElementBuilder
 
-export class Button extends ElementOfFramework implements Clickable, Element<FrameworkElementType>, ElementWithText {
-    private readonly btnElement: Clickable | ElementWithText
-
-    private constructor(framework: Framework, element: Clickable | ElementWithText) {
-        super(framework, element.info);
-        this.btnElement = element
+    constructor(framework: Framework, info: ElementInfo) {
+        super(info);
+        this.elementBuilder = framework.elementBuilder
     }
 
-    static async createByElementInfo(framework: Framework, info: ElementInfo): Promise<Button> {
-        info.type = Elements.Types.BUTTON
-        const element = await framework.getElement(info) as Clickable | ElementWithText
-        return new Button(framework, element)
+    async text(): Promise<string> {
+        return await
+            (await this
+                    .elementBuilder
+                    .createContainingText(this.info)
+            ).text()
     }
 
-    static createByOtherElement(framework: Framework, other: Element<FrameworkElementType>): Button {
-        return new Button(framework, other)
-    }
-
-    async click(): Promise<void> {
-        await this.btnElement.click()
-    }
-
-    text(): Promise<string> {
-        return Promise.resolve("");
+    async click() {
+        await
+            (await this
+                    .elementBuilder
+                    .createClickable(this.info)
+            ).click()
     }
 }

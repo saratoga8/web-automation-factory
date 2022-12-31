@@ -1,35 +1,42 @@
-import {ElementWithText} from "./ElementWithText";
-import {ElementOfFramework} from "./ElementOfFramework";
-import {Framework} from "../../framework/Framework";
-import {Elements} from "./Element";
+import {ElementBuilder, Framework} from "../../framework/Framework";
+import {Element, Elements} from "./Element";
 import ElementInfo = Elements.ElementInfo;
+import {Clickable} from "./Clickable";
+import {ContainsText} from "./ContainsText";
+import {TextEditable} from "./TextEditable";
 
 
+export type ContainingEditableText = Clickable & ContainsText & TextEditable
 
-export class TextInputElement extends ElementOfFramework implements ElementWithText {
-    private readonly txtElement: TextInputElement
+export class TextInputElement extends Element implements ContainingEditableText  {
+    private elementBuilder: ElementBuilder
 
-    private constructor(framework: Framework, element: TextInputElement) {
-        super(framework, element.info)
-        this.txtElement = element
-        this.info.type = Elements.Types.TEXT_INPUT
+    constructor(framework: Framework, info: ElementInfo) {
+        super(info)
+        this.elementBuilder = framework.elementBuilder
     }
 
-    static async createByElementInfo(framework: Framework, info: ElementInfo): Promise<TextInputElement> {
-        const element = await framework.getElement(info) as TextInputElement
-        return new TextInputElement(framework, element)
-    }
-
-    static createByOtherElement(framework: Framework, other: Clickable | ElementWithText): TextInputElement {
-        return new TextInputElement(framework, <TextInputElement>other)
-    }
-
-
-    async type(txt: string): Promise<void> {
-        this.txtElement.type()
+    async type(txt: string) {
+        await
+            (await this
+                    .elementBuilder
+                    .createTextEditable(this.info)
+            ).type(txt)
     }
 
     async text(): Promise<string> {
-        return await (<ElementWithText>await (await this.framework.getElement(this.info))).text()
+        return await
+            (await this
+                    .elementBuilder
+                    .createContainingText(this.info)
+            ).text()
+    }
+
+    async click() {
+        await
+            (await this
+                    .elementBuilder
+                    .createClickable(this.info)
+            ).click()
     }
 }

@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Element {
+- framework
+- name
+- selector
+- timeout
+  parent()
+  children()
+}
+
+Element <|-- Button
+Clickable <|-- Button
+Button <|-- TextButton
+ContainingText <|-- TextButton
+Element <|-- TextInput
+ContainingText <|-- TextInput
+
+class TextInput {
+}
+
+class Button {
+}
+
+class TextButton {
+}
+
+interface Clickable {
+click()
+}
+
+interface ContainingText {
+text()
+text(string)
+}
+
+Element *-- Locators
+
+enum Locators {
+CLASS_NAME
+CSS
+ID
+NAME
+LINK_TXT
+PARTIAL_LINK_TXT
+TAG_NAME
+XPATH
+}
+
+@enduml

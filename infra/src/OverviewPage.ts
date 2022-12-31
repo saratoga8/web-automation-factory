@@ -1,13 +1,10 @@
 import {SelectorType} from "./Selector";
 import {RootedPage} from "./RootedPage";
 import {Framework} from "../framework/Framework";
-import {Element, Elements, FrameworkElementType} from "./PageElements/Element";
+import {Elements} from "./PageElements/Element";
+import {waitFor, WaitInfo} from "../src/Utils"
+
 import ElementInfo = Elements.ElementInfo;
-import { waitFor, WaitInfo } from "../src/Utils"
-import {ElementOfFramework} from "./PageElements/ElementOfFramework";
-import {Button} from "./PageElements/Button";
-
-
 
 
 export enum Playgrounds {
@@ -76,10 +73,10 @@ export class OverviewPage extends RootedPage {
             }
         }
 
-        const rootElement = new ElementOfFramework(this.framework, this.rootElementInfo)
-        const element = await rootElement.element(playgroundsContainerElementInfo, playground.valueOf()) as Clickable
-        const btn = Button.createByOtherElement(this.framework, element)
-        await btn.click()
+        // const rootElement = new ElementOfFramework(this.framework, this.rootElementInfo)
+        // const element = await rootElement.element(playgroundsContainerElementInfo, playground.valueOf()) as Clickable
+        // const btn = Button.createByOtherElement(this.framework, element)
+        // await btn.click()
     }
 }
 

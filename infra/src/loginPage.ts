@@ -2,10 +2,9 @@ import {PageObject} from "./PageObject";
 import {Framework} from "../framework/Framework";
 import {Elements} from "./PageElements/Element";
 import {SelectorType} from "./Selector";
-import ElementInfo = Elements.ElementInfo;
 import {Button} from "./PageElements/Button";
 import {TextInputElement} from "./PageElements/TextInputElement";
-
+import ElementInfo = Elements.ElementInfo;
 
 
 type LoginCreds = { email: string, pwd: string }
@@ -41,10 +40,12 @@ export default class LoginPage extends PageObject {
     }
 
     async login(creds: LoginCreds) {
-        await new TextInputElement(this.framework, this.emailFieldInfo).type(creds.email)
-        await new TextInputElement(this.framework, this.pwdFieldInfo).type(creds.pwd)
+        const emailInput = await new TextInputElement(this.framework, this.emailFieldInfo)
+        await emailInput.type(creds.email)
+        const pwdInput = await new TextInputElement(this.framework, this.pwdFieldInfo)
+        await pwdInput.type(creds.pwd)
 
-        const btn = await Button.createByElementInfo(this.framework, this.submitBtn)
-        await btn.click()
+        const submitBtn = await new Button(this.framework, this.submitBtn)
+        await submitBtn.click()
     }
 }

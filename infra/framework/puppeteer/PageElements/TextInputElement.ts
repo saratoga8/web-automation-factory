@@ -1,19 +1,31 @@
-import {ElementWithText} from "../../../src/PageElements/ElementWithText";
-import {assert} from "chai";
 import {ElementPuppeteer} from "../ElementPuppeteer";
 import {BrowserPuppeteerWrapper} from "../BrowserPuppeteerWrapper";
+import {Elements} from "../../../src/PageElements/Element";
+import ElementInfo = Elements.ElementInfo;
+import {TextEditable} from "../../../src/PageElements/TextEditable";
+import {ContainsText} from "../../../src/PageElements/ContainsText";
+import {Clickable} from "../../../src/PageElements/Clickable";
 
-export class TextInputElement extends ElementPuppeteer implements ElementWithText {
-    async text(): Promise<string> {
-        const page = await (await BrowserPuppeteerWrapper.getInstance()).getCurrentPage()
-        const txt = await page.$eval(this.getSelectorStr(this.info.selector), (element) => element.getAttribute('value'))
-        if (txt) {
-            return txt
-        }
-        assert.fail(`Can't get text from the element '${this.info.name}' with the selector '${this.info.selector.value}'`)
+export class TextInputElement extends ElementPuppeteer implements Clickable, ContainsText, TextEditable {
+    constructor(info: ElementInfo) {
+        super(info);
     }
 
-    async type(txt: string): Promise<void> {
+    click() {
+        return Promise.resolve(undefined);
+    }
+
+    async text(): Promise<string> {
+        const browserWrapper = await BrowserPuppeteerWrapper.getInstance()
+        const page = await browserWrapper.getCurrentPage()
+
+        const getValue = (element: Element) => element.getAttribute('value')
+        const selectorStr = this.getSelectorStr(this.info.selector)
+        const txt = await page.$eval(selectorStr, getValue)
+        return txt || ""
+    }
+
+    async type(txt: string) {
         await (await this.instance).type(txt)
     }
 }
