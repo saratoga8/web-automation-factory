@@ -1,13 +1,12 @@
-import {PageObject} from "./PageObject";
-import {Framework} from "../framework/Framework";
-import {Elements} from "./PageElements/Element";
-import {SelectorType} from "./Selector";
-import {Button} from "./PageElements/Button";
-import {TextInputElement} from "./PageElements/TextInputElement";
-import ElementInfo = Elements.ElementInfo;
+import { PageObject } from './PageObject'
+import { Framework } from '../framework/Framework'
+import { Elements } from './PageElements/Element'
+import { SelectorType } from './Selector'
+import { Button } from './PageElements/Button'
+import { TextInputElement } from './PageElements/TextInputElement'
+import ElementInfo = Elements.ElementInfo
 
-
-type LoginCreds = { email: string, pwd: string }
+type LoginCreds = { email: string; pwd: string }
 
 export default class LoginPage extends PageObject {
     private readonly emailFieldInfo: ElementInfo
@@ -19,30 +18,39 @@ export default class LoginPage extends PageObject {
             framework,
             'Studio | AI21',
             'https://studio.ai21.com/login',
-            'Login',
-        );
+            'Login'
+        )
         this.emailFieldInfo = {
             name: 'Email',
-            selector: { type: SelectorType.CSS, value: '#email' }
+            selector: { type: SelectorType.CSS, value: '#email' },
         }
         this.pwdFieldInfo = {
             name: 'Password',
-            selector: { type: SelectorType.CSS, value: '#password' }
+            selector: { type: SelectorType.CSS, value: '#password' },
         }
         this.submitBtn = {
             name: 'Submit',
-            selector: { type: SelectorType.CSS, value: 'button[data-testid="login_button"]'}
+            selector: {
+                type: SelectorType.CSS,
+                value: 'button[data-testid="login_button"]',
+            },
         }
     }
 
     isOpen(): Promise<boolean> {
-        return Promise.resolve(false);
+        return Promise.resolve(false)
     }
 
     async login(creds: LoginCreds) {
-        const emailInput = await new TextInputElement(this.framework, this.emailFieldInfo)
+        const emailInput = await new TextInputElement(
+            this.framework,
+            this.emailFieldInfo
+        )
         await emailInput.type(creds.email)
-        const pwdInput = await new TextInputElement(this.framework, this.pwdFieldInfo)
+        const pwdInput = await new TextInputElement(
+            this.framework,
+            this.pwdFieldInfo
+        )
         await pwdInput.type(creds.pwd)
 
         const submitBtn = await new Button(this.framework, this.submitBtn)

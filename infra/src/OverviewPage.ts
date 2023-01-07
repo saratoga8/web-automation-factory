@@ -1,14 +1,13 @@
-import {SelectorType} from "./Selector";
-import {RootedPage} from "./RootedPage";
-import {Framework} from "../framework/Framework";
-import {Elements} from "./PageElements/Element";
-import {waitFor, WaitInfo} from "../src/Utils"
+import { SelectorType } from './Selector'
+import { RootedPage } from './RootedPage'
+import { Framework } from '../framework/Framework'
+import { Elements } from './PageElements/Element'
+import { waitFor, WaitInfo } from '../src/Utils'
 
-import ElementInfo = Elements.ElementInfo;
-
+import ElementInfo = Elements.ElementInfo
 
 export enum Playgrounds {
-    TableQA = 10
+    TableQA = 10,
 }
 
 export class OverviewPage extends RootedPage {
@@ -23,7 +22,11 @@ export class OverviewPage extends RootedPage {
             'Overview',
             { type: SelectorType.CSS, value: '#root' }
         )
-        this.rootElementInfo = { name: 'Root element', selector: this.rootElementSelector, timeoutMilliSeconds: OverviewPage.SIGNIN_TIMEOUT }
+        this.rootElementInfo = {
+            name: 'Root element',
+            selector: this.rootElementSelector,
+            timeoutMilliSeconds: OverviewPage.SIGNIN_TIMEOUT,
+        }
     }
 
     async isOpen(): Promise<boolean> {
@@ -45,7 +48,8 @@ export class OverviewPage extends RootedPage {
         //     await (await this.framework).sleep(1000)
         // }
         // return false
-        const sleep = async () => await (await this.framework).sleep(info.stepMs)
+        const sleep = async () =>
+            await (await this.framework).sleep(info.stepMs)
         const predicate = async () => {
             const actualURL = await (await this.framework.browser).getUrl()
             return actualURL === this.url
@@ -54,13 +58,16 @@ export class OverviewPage extends RootedPage {
             stepMs: 1000,
             timeoutMs: OverviewPage.SIGNIN_TIMEOUT,
             sleep,
-            predicate
+            predicate,
         }
         return await waitFor(info)
     }
 
     private getPlaygroundElementInfo(): ElementInfo {
-        const selector = { type: SelectorType.CSS, value: 'div.MuiGrid-container.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-justify-content-xs-space-between' }
+        const selector = {
+            type: SelectorType.CSS,
+            value: 'div.MuiGrid-container.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-justify-content-xs-space-between',
+        }
         return { name: Playgrounds.TableQA.toString(), selector }
     }
 
@@ -69,8 +76,8 @@ export class OverviewPage extends RootedPage {
             name: 'playgrounds',
             selector: {
                 type: SelectorType.CSS,
-                value: 'div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-6.MuiGrid-grid-md-4 svg'
-            }
+                value: 'div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-6.MuiGrid-grid-md-4 svg',
+            },
         }
 
         // const rootElement = new ElementOfFramework(this.framework, this.rootElementInfo)
@@ -79,7 +86,3 @@ export class OverviewPage extends RootedPage {
         // await btn.click()
     }
 }
-
-
-
-

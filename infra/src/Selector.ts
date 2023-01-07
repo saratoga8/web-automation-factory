@@ -1,5 +1,9 @@
-export enum SelectorType { ID, CLASS, CSS }
+export enum SelectorType {
+    ID,
+    CLASS,
+    CSS,
+}
 export type Selector = {
-    type: SelectorType,
+    type: SelectorType
     value: string
 }

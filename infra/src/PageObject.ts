@@ -1,4 +1,4 @@
-import {Framework} from "../framework/Framework";
+import { Framework } from '../framework/Framework'
 
 export abstract class PageObject {
     protected constructor(

@@ -1,8 +1,8 @@
 export type WaitInfo = {
-    timeoutMs: number,
-    stepMs: number,
+    timeoutMs: number
+    stepMs: number
     predicate(args?: any): Promise<boolean>
-    sleep(timeMs: number): Promise<void>,
+    sleep(timeMs: number): Promise<void>
 }
 
 export const waitFor = async (info: WaitInfo): Promise<boolean> => {
