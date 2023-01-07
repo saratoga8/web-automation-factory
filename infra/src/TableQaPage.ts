@@ -1,8 +1,9 @@
 import { PlaygroundPage } from './PlaygroundPage'
 import { Framework } from '../framework/Framework'
 import { SelectorType } from './Selector'
-import { Elements } from './PageElements/Element'
 import { Playgrounds } from './OverviewPage'
+import { Elements } from './PageElements/general/Element'
+
 import ElementInfo = Elements.ElementInfo
 
 export class TableQaPage extends PlaygroundPage {

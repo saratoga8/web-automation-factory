@@ -1,5 +1,5 @@
-import { Before, After, setWorldConstructor } from "@cucumber/cucumber";
-import CustomWorld from "./CustomWorld";
+import { After, Before, setWorldConstructor } from '@cucumber/cucumber'
+import CustomWorld from './CustomWorld'
 
 setWorldConstructor(CustomWorld)
 
@@ -8,5 +8,5 @@ Before(async function () {
 })
 
 After(async function () {
-    await this.browser.close();
+    await this.browser.close()
 })

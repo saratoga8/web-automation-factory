@@ -1,9 +1,9 @@
 import { ElementPuppeteer } from '../ElementPuppeteer'
 import { assert } from 'chai'
 import { BrowserPuppeteerWrapper } from '../BrowserPuppeteerWrapper'
-import { Elements } from '../../../src/PageElements/Element'
-import { Clickable } from '../../../src/PageElements/Clickable'
-import { ContainsText } from '../../../src/PageElements/ContainsText'
+import { Elements } from '../../../src/PageElements/general/Element'
+import { Clickable } from '../../../src/PageElements/general/Clickable'
+import { ContainsText } from '../../../src/PageElements/general/ContainsText'
 
 export class Button
     extends ElementPuppeteer

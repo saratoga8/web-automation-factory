@@ -1,4 +1,4 @@
-import { ElementBuilder, Framework } from '../../framework/Framework'
+import { ElementBuilder, Framework } from '../../../framework/Framework'
 import { Element, Elements } from './Element'
 import ElementInfo = Elements.ElementInfo
 import { Clickable } from './Clickable'

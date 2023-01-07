@@ -1,10 +1,10 @@
 import { ElementPuppeteer } from '../ElementPuppeteer'
 import { BrowserPuppeteerWrapper } from '../BrowserPuppeteerWrapper'
-import { Elements } from '../../../src/PageElements/Element'
+import { Elements } from '../../../src/PageElements/general/Element'
+import { TextEditable } from '../../../src/PageElements/general/TextEditable'
+import { ContainsText } from '../../../src/PageElements/general/ContainsText'
+import { Clickable } from '../../../src/PageElements/general/Clickable'
 import ElementInfo = Elements.ElementInfo
-import { TextEditable } from '../../../src/PageElements/TextEditable'
-import { ContainsText } from '../../../src/PageElements/ContainsText'
-import { Clickable } from '../../../src/PageElements/Clickable'
 
 export class TextInputElement
     extends ElementPuppeteer

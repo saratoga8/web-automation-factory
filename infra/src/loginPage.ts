@@ -1,9 +1,9 @@
 import { PageObject } from './PageObject'
 import { Framework } from '../framework/Framework'
-import { Elements } from './PageElements/Element'
+import { Elements } from './PageElements/general/Element'
 import { SelectorType } from './Selector'
-import { Button } from './PageElements/Button'
-import { TextInputElement } from './PageElements/TextInputElement'
+import { Button } from './PageElements/general/Button'
+import { TextInputElement } from './PageElements/general/TextInputElement'
 import ElementInfo = Elements.ElementInfo
 
 type LoginCreds = { email: string; pwd: string }

@@ -2,10 +2,14 @@
     "name": "ai21",
     "version": "1.0.0",
     "description": "",
-    "scripts": {},
     "keywords": [],
     "author": "",
     "license": "ISC",
+    "scripts": {
+        "lint": "eslint --fix",
+        "test": "tsc & cucumber-js",
+        "test-current": "tsc & cucumber-js -t '@current'"
+    },
     "devDependencies": {
         "@badeball/cypress-cucumber-preprocessor": "^13.0.1",
         "@cucumber/cucumber": "^8.10.0",

@@ -1,6 +1,6 @@
 import { ElementHandle } from 'puppeteer'
 import { assert } from 'chai'
-import { Element, Elements } from '../../src/PageElements/Element'
+import { Element, Elements } from '../../src/PageElements/general/Element'
 import { BrowserPuppeteerWrapper } from './BrowserPuppeteerWrapper'
 import { Selector, SelectorType } from '../../src/Selector'
 
@@ -46,9 +46,6 @@ export class ElementPuppeteer extends Element {
         info: Elements.ElementInfo,
         ind?: number
     ): Promise<ElementPuppeteer> {
-        console.log(
-            `Getting the sub element ${info.name} of the element ${this.info.name}`
-        )
         const found = ind
             ? (
                   await (

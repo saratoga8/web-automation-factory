@@ -1,6 +1,6 @@
 import { ElementBuilder, Framework } from '../Framework'
 import { BrowserWrapper } from '../BrowserWrapper'
-import { Elements } from '../../src/PageElements/Element'
+import { Elements } from '../../src/PageElements/general/Element'
 import { BrowserPuppeteerWrapper } from './BrowserPuppeteerWrapper'
 import { ElementPuppeteer } from './ElementPuppeteer'
 import { PuppeteerElementBuilder } from './PuppeteerElementBuilder'

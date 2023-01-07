@@ -1,11 +1,11 @@
 import { ElementBuilder } from '../Framework'
-import { Elements } from '../../src/PageElements/Element'
+import { Elements } from '../../src/PageElements/general/Element'
 import { BrowserPuppeteerWrapper } from './BrowserPuppeteerWrapper'
 import { Page } from 'puppeteer'
 import { assert } from 'chai'
-import { TextEditable } from '../../src/PageElements/TextEditable'
-import { Clickable } from '../../src/PageElements/Clickable'
-import { ContainsText } from '../../src/PageElements/ContainsText'
+import { TextEditable } from '../../src/PageElements/general/TextEditable'
+import { Clickable } from '../../src/PageElements/general/Clickable'
+import { ContainsText } from '../../src/PageElements/general/ContainsText'
 
 export class PuppeteerElementBuilder implements ElementBuilder {
     private async getPage(): Promise<Page> {

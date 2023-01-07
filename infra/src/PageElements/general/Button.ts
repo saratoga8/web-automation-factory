@@ -1,5 +1,5 @@
 import { Element, Elements } from './Element'
-import { ElementBuilder, Framework } from '../../framework/Framework'
+import { ElementBuilder, Framework } from '../../../framework/Framework'
 import ElementInfo = Elements.ElementInfo
 import { ContainsText } from './ContainsText'
 import { Clickable } from './Clickable'

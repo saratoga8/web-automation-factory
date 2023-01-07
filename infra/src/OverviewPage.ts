@@ -1,7 +1,7 @@
 import { SelectorType } from './Selector'
 import { RootedPage } from './RootedPage'
 import { Framework } from '../framework/Framework'
-import { Elements } from './PageElements/Element'
+import { Elements } from './PageElements/general/Element'
 import { waitFor, WaitInfo } from '../src/Utils'
 
 import ElementInfo = Elements.ElementInfo
